@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "Threadify/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "50mb" }
-    }
-  ],
   "routes": [
     {
       "src": "/static/(.*)",
