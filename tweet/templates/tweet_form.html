@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+my tweet
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4">Welcome to Threadify a django project</h1>
+<h2>
+    {%if form.instance.pk%}
+    Edit Thread
+    {% else %}
+    Create Thread
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-warning" type="submit">Submit</button>
+        <a href="{% url 'tweet_list' %}">Back to Thread list</a>
+    </form>
+</h2>
+
+{% endblock %}
