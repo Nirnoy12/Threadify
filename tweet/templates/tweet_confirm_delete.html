@@ -5,11 +5,12 @@ my tweet
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4">Are you sure that you want to delete the tweet ?</h1>
-<form method="POST">
+<h1 class="text-center mt-4 text-2xl font-bold text-violet-300 mb-8">Are you sure that you want to delete the tweet?</h1>
+<form method="POST" class="flex flex-col items-center gap-6">
     {% csrf_token %}
-    <button class="btn btn-danger">DELETE</button>
-    <a class="btn btn-success" href="{% url 'tweet_list' %}">Cancel</a>
+    <div class="flex gap-4">
+      <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition" type="submit">DELETE</button>
+      <a class="bg-green-600 hover:bg-green-400 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition" href="{% url 'tweet_list' %}">Cancel</a>
+    </div>
 </form>
-
 {% endblock %}

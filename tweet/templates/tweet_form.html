@@ -5,19 +5,22 @@ my tweet
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4">Welcome to Threadify a django project</h1>
-<h2>
-    {%if form.instance.pk%}
-    Edit Thread
-    {% else %}
-    Create Thread
-    {% endif %}
-    <form method="post" enctype="multipart/form-data" class="form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-warning" type="submit">Submit</button>
-        <a href="{% url 'tweet_list' %}">Back to Thread list</a>
-    </form>
-</h2>
-
+<h1 class="text-center mt-4 text-3xl font-bold text-violet-300 mb-8">{% if form.instance.pk %}Edit Thread{% else %}Create Thread{% endif %}</h1>
+<form method="post" enctype="multipart/form-data" class="bg-white bg-opacity-10 rounded-xl shadow-lg p-8 flex flex-col items-center gap-6 w-full max-w-lg mx-auto">
+    {% csrf_token %}
+    <div class="w-full flex flex-col gap-4">
+      {% for field in form %}
+        <div>
+          <label class="block text-left text-violet-200 font-semibold mb-1">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<p class="text-xs text-gray-400">{{ field.help_text }}</p>{% endif %}
+          {% for error in field.errors %}<p class="text-xs text-red-400">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="flex gap-4 mt-4">
+      <button class="bg-violet-600 hover:bg-violet-400 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition" type="submit">Submit</button>
+      <a href="{% url 'tweet_list' %}" class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition">Back to Thread list</a>
+    </div>
+</form>
 {% endblock %}
